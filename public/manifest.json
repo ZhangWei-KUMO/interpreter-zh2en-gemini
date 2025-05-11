@@ -1,0 +1,22 @@
+{
+  "name": "中英同声传译 | Real-time Interpreter",
+  "short_name": "同声传译",
+  "description": "实时语音转录和翻译应用，支持中英文互译",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#121212",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+} 

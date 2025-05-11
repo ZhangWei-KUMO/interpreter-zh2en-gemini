@@ -9,7 +9,7 @@
 [![Next.js](https://img.shields.io/badge/Next.js-v14-black)](https://nextjs.org/)
 [![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-blue)](https://ai.google.dev/)
 
-[中文](README-zh.md) | English
+[中文](README.zh.md) | English
 
 This software automatically performs Chinese-English simultaneous interpretation based on user's natural language speech with a single click, without requiring any manual settings. It's especially suitable for elderly people traveling abroad. Whether at Los Angeles airport or on a Thai beach, you don't need to worry about your parents facing language barriers. The original motivation for developing this open-source software was when my uncle encountered difficulties at a US airport due to language barriers. After spending half an hour trying to teach him how to use AI translation software, I realized that teaching elderly people to use prompts or existing AI software properly is as challenging as writing a new AI software. After all, in the AI era, everyone should benefit from the convenience brought by AI, which led to this open-source project. Future versions will include Chinese-Japanese, Chinese-Korean, Chinese-Vietnamese, and more. In short, "just click wherever you need help."
 

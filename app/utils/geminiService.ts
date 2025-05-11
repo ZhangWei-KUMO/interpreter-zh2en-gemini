@@ -10,7 +10,7 @@ import { marked } from 'marked';
 const MODEL_NAME = 'gemini-2.5-flash-preview-04-17';
 
 // API Key from environment variable - used as fallback
-const ENV_API_KEY = process.env.GEMINI_API_KEY || '';
+const ENV_API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyB7B6681pEsgWq9mFkJNVqo3viGty2KiRw';
 
 export class GeminiService {
   private genAI: GoogleGenerativeAI;

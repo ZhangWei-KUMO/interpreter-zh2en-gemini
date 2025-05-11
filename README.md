@@ -1,6 +1,8 @@
-# Gemini Interpreter
+# Interpreter for Chinese-English
 
-A real-time English-Chinese simultaneous interpretation web application built with Next.js 14 and Google's Gemini 2.5 Flash AI model.
+A real-time English-Chinese simultaneous interpretation web application built with Next.js 14 and Google's Gemini 2.5 Pro AI model.
+
+[中文文档](README.zh.md) | English
 
 ## Features
 

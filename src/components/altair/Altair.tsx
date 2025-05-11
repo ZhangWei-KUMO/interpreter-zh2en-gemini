@@ -45,13 +45,14 @@ function AltairComponent() {
       generationConfig: {
         responseModalities: "audio",
         speechConfig: {
-          voiceConfig: { prebuiltVoiceConfig: { voiceName: "Aoede" } },
+          voiceConfig: { prebuiltVoiceConfig: { voiceName: "Kore" } },
+          languageCode: "cmn-CN" as any,
         },
       },
       systemInstruction: {
         parts: [
           {
-            text: 'You are my helpful assistant. Any time I ask you for a graph call the "render_altair" function I have provided you. Dont ask for additional information just make your best judgement.',
+            text: '请扮演联合国大会专业同声翻译，当你听到中文汉语时请直接翻译成英语，当听到英语时请直接翻译成中文汉语。',
           },
         ],
       },

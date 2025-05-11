@@ -49,6 +49,7 @@ export type LiveGenerationConfig = GenerationConfig & {
         voiceName: "Puck" | "Charon" | "Kore" | "Fenrir" | "Aoede" | string;
       };
     };
+    languageCode?: string;
   };
 };
 

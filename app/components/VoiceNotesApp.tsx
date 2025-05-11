@@ -595,17 +595,17 @@ export default function VoiceNotesApp() {
                   onMouseDown={handleRecordButtonPress}
                   onMouseUp={handleRecordButtonRelease}
                   onMouseLeave={handleRecordButtonRelease}
-                  onTouchStart={handleRecordButtonPress}
-                  onTouchEnd={handleRecordButtonRelease}
-                  onTouchCancel={handleRecordButtonRelease}
+                  onTouchStart={(e) => { e.preventDefault(); handleRecordButtonPress(); }}
+                  onTouchEnd={(e) => { e.preventDefault(); handleRecordButtonRelease(); }}
+                  onTouchCancel={(e) => { e.preventDefault(); handleRecordButtonRelease(); }}
                   disabled={isTranslating}
-                >
+                style={{userSelect: "none", WebkitUserSelect: "none", touchAction: "manipulation"}}>
                   {isRecording ? (
-                    <><i className="fa-solid fa-microphone-lines"></i> {t('recordingNow')}</>
+                    <><i className="fa-solid fa-microphone-lines"></i> {t('recordingNow')}</style={{userSelect: "none", WebkitUserSelect: "none", touchAction: "manipulation"}}>
                   ) : (
-                    <><i className="fa-solid fa-microphone"></i> {t('holdToRecordText')}</>
+                    <><i className="fa-solid fa-microphone"></i> {t('holdToRecordText')}</style={{userSelect: "none", WebkitUserSelect: "none", touchAction: "manipulation"}}>
                   )}
-                </button>
+                </buttonstyle={{userSelect: "none", WebkitUserSelect: "none", touchAction: "manipulation"}}>
                 
                 <button 
                   className="icon-button clear-button"

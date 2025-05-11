@@ -90,8 +90,12 @@ export class AudioService {
   // Stops recording and returns the recorded audio as a Blob
   async stopRecording(): Promise<Blob> {
     return new Promise((resolve, reject) => {
-      if (!this.mediaRecorder) {
-        reject(new Error('No active recording'));
+      if (!this.mediaRecorder || this.mediaRecorder.state === 'inactive') {
+        console.warn('Attempted to stop recording, but no active recording found');
+        // Create an empty audio blob to avoid breaking the app flow
+        const emptyBlob = new Blob([], { type: 'audio/webm' });
+        this.cleanup();
+        resolve(emptyBlob);
         return;
       }
 

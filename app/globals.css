@@ -379,7 +379,7 @@ body {
   gap: 8px;
 }
 
-.record-button.start:hover {
+.record-button:hover {
   background-color: var(--color-recording);
   color: white;
   border-color: var(--color-recording);
@@ -387,13 +387,14 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-.record-button.stop {
+.record-button.recording {
   background-color: var(--color-recording);
   color: white;
   border-color: var(--color-recording);
+  animation: pulse 2s infinite;
 }
 
-.record-button.stop:hover {
+.record-button.recording:hover {
   background-color: #ff2920;
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
@@ -404,17 +405,6 @@ body {
   cursor: not-allowed;
   transform: none !important;
   box-shadow: none !important;
-}
-
-.record-button.pressed {
-  transform: scale(0.97);
-  background-color: var(--color-accent-darker);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.record-button.recording {
-  background-color: var(--color-recording);
-  animation: pulse 2s infinite;
 }
 
 @keyframes pulse {

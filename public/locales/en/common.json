@@ -29,6 +29,7 @@
   "translatedPlaceholder": "Translation will appear here...",
   "recordingNow": "Recording...",
   "holdToRecordText": "Hold to record",
+  "clickToRecordText": "Click to record",
   "history": "History",
   "noHistory": "No history yet",
   "recordVoicePrompt": "Record your voice to save translation history",

@@ -39,7 +39,6 @@ export default function VoiceNotesApp() {
   const [isTranslating, setIsTranslating] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isButtonPressed, setIsButtonPressed] = useState(false);
-  const pressTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   
   // 设置相关状态
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
@@ -313,73 +312,68 @@ export default function VoiceNotesApp() {
 
   const handleRecordButtonPress = () => {
     setIsButtonPressed(true);
-    // Start a timeout to detect long press
-    pressTimeoutRef.current = setTimeout(async () => {
-      // Long press detected, start recording
-      try {
-        setRecordingStatus(t('recording'));
-        
-        const { analyserNode, dataArray } = await audioService.current.startRecording();
-        analyserNodeRef.current = analyserNode;
-        waveformDataArrayRef.current = dataArray;
-        
-        setIsRecording(true);
-        
-        // Reset current translation for a new recording
-        setCurrentTranslation({
-          id: crypto.randomUUID(),
-          originalText: '',
-          translatedText: '',
-          sourceLanguage: 'unknown',
-          targetLanguage: 'english',
-          timestamp: Date.now()
-        });
-        
-        // No need to call startLiveDisplay() since we're not using the modal anymore
-      } catch (error) {
-        console.error('Error starting recording:', error);
-        setRecordingStatus(t('errorStartingRecording'));
-        setIsButtonPressed(false);
-      }
-    }, 300); // 300ms is a good threshold for detecting long press
+    // 直接开始录音，不再使用长按检测
+    if (!isRecording) {
+      startRecording();
+    } else {
+      stopRecording();
+    }
   };
 
-  const handleRecordButtonRelease = async () => {
+  const startRecording = async () => {
+    try {
+      setRecordingStatus(t('recording'));
+      
+      const { analyserNode, dataArray } = await audioService.current.startRecording();
+      analyserNodeRef.current = analyserNode;
+      waveformDataArrayRef.current = dataArray;
+      
+      setIsRecording(true);
+      
+      // Reset current translation for a new recording
+      setCurrentTranslation({
+        id: crypto.randomUUID(),
+        originalText: '',
+        translatedText: '',
+        sourceLanguage: 'unknown',
+        targetLanguage: 'english',
+        timestamp: Date.now()
+      });
+      
+      // No need to call startLiveDisplay() since we're not using the modal anymore
+    } catch (error) {
+      console.error('Error starting recording:', error);
+      setRecordingStatus(t('errorStartingRecording'));
+      setIsButtonPressed(false);
+    }
+  };
+
+  const stopRecording = async () => {
+    try {
+      setRecordingStatus(t('processing'));
+      
+      // Get recorded audio
+      const audioBlob = await audioService.current.stopRecording();
+      
+      setIsRecording(false);
+      
+      // Process the audio
+      processAudio(audioBlob);
+    } catch (error) {
+      console.error('Error stopping recording:', error);
+      
+      setIsRecording(false);
+      setRecordingStatus(t('errorProcessingRecording'));
+    }
+  };
+
+  const handleRecordButtonRelease = () => {
     setIsButtonPressed(false);
-    
-    // Clear the timeout if released before long press is detected
-    if (pressTimeoutRef.current) {
-      clearTimeout(pressTimeoutRef.current);
-      pressTimeoutRef.current = null;
-    }
-    
-    // Only stop recording if we were actually recording
-    if (isRecording) {
-      try {
-        setRecordingStatus(t('processing'));
-        
-        // Get recorded audio
-        const audioBlob = await audioService.current.stopRecording();
-        
-        setIsRecording(false);
-        
-        // Process the audio
-        processAudio(audioBlob);
-      } catch (error) {
-        console.error('Error stopping recording:', error);
-        
-        setIsRecording(false);
-        setRecordingStatus(t('errorProcessingRecording'));
-      }
-    }
   };
 
   // Clean up timeout if component unmounts
   useEffect(() => {
     return () => {
-      if (pressTimeoutRef.current) {
-        clearTimeout(pressTimeoutRef.current);
-      }
       audioService.current.stopSpeaking();
     };
   }, []);
@@ -592,19 +586,20 @@ export default function VoiceNotesApp() {
               <div className="recording-buttons">
                 <button
                   className={`record-button ${isRecording ? 'recording' : ''} ${isButtonPressed ? 'pressed' : ''}`}
-                  onMouseDown={handleRecordButtonPress}
-                  onMouseUp={handleRecordButtonRelease}
-                  onMouseLeave={handleRecordButtonRelease}
-                  onTouchStart={(e) => { e.preventDefault(); handleRecordButtonPress(); }}
-                  onTouchEnd={(e) => { e.preventDefault(); handleRecordButtonRelease(); }}
-                  onTouchCancel={(e) => { e.preventDefault(); handleRecordButtonRelease(); }}
+                  onClick={handleRecordButtonPress}
+                  onMouseDown={() => setIsButtonPressed(true)}
+                  onMouseUp={() => setIsButtonPressed(false)}
+                  onMouseLeave={() => setIsButtonPressed(false)}
+                  onTouchStart={(e) => { e.preventDefault(); setIsButtonPressed(true); }}
+                  onTouchEnd={(e) => { e.preventDefault(); setIsButtonPressed(false); }}
+                  onTouchCancel={(e) => { e.preventDefault(); setIsButtonPressed(false); }}
                   disabled={isTranslating}
-                style={{userSelect: "none", WebkitUserSelect: "none", touchAction: "manipulation"}}
+                  style={{userSelect: "none", WebkitUserSelect: "none", touchAction: "manipulation"}}
                 >
                   {isRecording ? (
                     <><i className="fa-solid fa-microphone-lines"></i> {t('recordingNow')}</>
                   ) : (
-                    <><i className="fa-solid fa-microphone"></i> {t('holdToRecordText')}</>
+                    <><i className="fa-solid fa-microphone"></i> {t('clickToRecordText')}</>
                   )}
                 </button>
                 

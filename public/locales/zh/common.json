@@ -29,6 +29,7 @@
   "translatedPlaceholder": "翻译将在这里显示...",
   "recordingNow": "正在录音...",
   "holdToRecordText": "长按开始录音",
+  "clickToRecordText": "点击开始录音",
   "history": "历史记录",
   "noHistory": "暂无历史记录",
   "recordVoicePrompt": "录制语音，将自动保存翻译记录",

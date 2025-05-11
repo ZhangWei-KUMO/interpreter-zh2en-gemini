@@ -2,6 +2,10 @@
 
 一个使用 Next.js 14 和谷歌 Gemini 2.5 Pro AI 模型构建的实时英汉同声传译 Web 应用程序。
 
+[![Node.js](https://img.shields.io/badge/Node.js-v18.0%2B-brightgreen)](https://nodejs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-v14-black)](https://nextjs.org/)
+[![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-blue)](https://ai.google.dev/)
+
 中文 | [English](README.md)
 
 ## 功能特点

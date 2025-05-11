@@ -80,27 +80,6 @@ This software automatically performs Chinese-English simultaneous interpretation
 5. **Translation**: Based on the detected language, the text is translated to the other language.
 6. **Text-to-Speech**: Translation is read aloud using the browser's speech synthesis API.
 
-## Project Structure
-
-```
-gemini-interpreter/
-├── app/
-│   ├── components/
-│   │   ├── VoiceNotesApp.tsx    # Main application component
-│   │   ├── SettingsModal.tsx    # API key settings modal
-│   │   └── ServiceWorkerRegister.tsx
-│   ├── utils/
-│   │   ├── audioService.ts      # Audio recording and playback
-│   │   ├── geminiService.ts     # Gemini API integration
-│   │   └── helpers.ts           # Utility functions
-│   ├── layout.tsx               # Next.js layout
-│   ├── page.tsx                 # Main page
-│   └── globals.css              # Global styles
-├── public/
-├── next.config.js
-├── package.json
-└── README.md
-```
 
 ## Limitations
 

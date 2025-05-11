@@ -1,21 +1,30 @@
-# Interpreter for Chinese-English
+# Chinese-English Simultaneous Interpreter
 
-A real-time English-Chinese simultaneous interpretation web application built with Next.js 14 and Google's Gemini 2.5 Pro AI model.
+<p align="center">
+  <img src="./public/icon-192x192.png" alt="Chinese-English Interpreter Icon" width="150">
+</p>
 
-[中文文档](README.zh.md) | English
+
+[![Node.js](https://img.shields.io/badge/Node.js-v18.0%2B-brightgreen)](https://nodejs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-v14-black)](https://nextjs.org/)
+[![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-blue)](https://ai.google.dev/)
+
+[中文](README-zh.md) | English
+
+This software automatically performs Chinese-English simultaneous interpretation based on user's natural language speech with a single click, without requiring any manual settings. It's especially suitable for elderly people traveling abroad. Whether at Los Angeles airport or on a Thai beach, you don't need to worry about your parents facing language barriers. The original motivation for developing this open-source software was when my uncle encountered difficulties at a US airport due to language barriers. After spending half an hour trying to teach him how to use AI translation software, I realized that teaching elderly people to use prompts or existing AI software properly is as challenging as writing a new AI software. After all, in the AI era, everyone should benefit from the convenience brought by AI, which led to this open-source project. Future versions will include Chinese-Japanese, Chinese-Korean, Chinese-Vietnamese, and more. In short, "just click wherever you need help."
 
 ## Features
 
-- 🎙️ **Voice Recognition**: Record speech through your device's microphone
-- 🔄 **Automatic Language Detection**: Identifies whether the speech is in English or Chinese
-- 🌐 **Bidirectional Translation**: Seamlessly translates between English and Chinese
-- 🔊 **Text-to-Speech**: Reads translations aloud using browser's speech synthesis
+- 🎙️ **Voice Recognition**: Record speech via device microphone
+- 🔄 **Automatic Language Detection**: Identify whether speech is English or Chinese
+- 🌐 **Two-way Translation**: Seamlessly convert between English and Chinese
+- 🔊 **Text-to-Speech**: Read translations aloud using browser's speech synthesis
 - 📝 **Text Editing**: Edit transcriptions and translations directly in the app
 - 📱 **Responsive Design**: Works on desktop and mobile devices
-- 🌙 **Dark/Light Modes**: Toggle between dark and light themes
-- 🔒 **Client-side Processing**: Your audio recordings stay on your device
+- 🌙 **Dark/Light Mode**: Switch between dark and light themes
+- 🔒 **Client-side Processing**: Your recordings stay on your device
 
-## Technology Stack
+## Tech Stack
 
 - **Frontend**: Next.js 14, React 18, TypeScript
 - **AI**: Google Gemini 2.5 Pro for speech recognition and translation
@@ -26,8 +35,8 @@ A real-time English-Chinese simultaneous interpretation web application built wi
 
 ### Prerequisites
 
-- Node.js 18.0 or later
-- A Google Gemini API key (get one from [Google AI Studio](https://aistudio.google.com/))
+- Node.js 18.0 or higher
+- Google Gemini API key (get from [Google AI Studio](https://aistudio.google.com/))
 
 ### Installation
 
@@ -54,23 +63,23 @@ A real-time English-Chinese simultaneous interpretation web application built wi
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Usage
+### How to Use
 
 1. Click and hold the microphone button to start recording.
-2. Speak in either English or Chinese.
+2. Speak in English or Chinese.
 3. Release the button to stop recording and trigger translation.
 4. The app will automatically detect the language and translate to the other language.
 5. Click the speaker button to hear the translation.
-6. Edit either the transcription or translation as needed.
+6. Edit the transcription or translation as needed.
 
 ## How It Works
 
 1. **Audio Recording**: The app captures audio using the MediaRecorder API.
-2. **Audio Visualization**: Generates a real-time waveform during recording using the Web Audio API.
-3. **Speech Recognition**: The audio is sent to Gemini AI for transcription.
-4. **Language Detection**: Gemini identifies whether the transcribed text is in English or Chinese.
+2. **Audio Visualization**: Real-time waveform is generated during recording using Web Audio API.
+3. **Speech Recognition**: Audio is sent to Gemini AI for transcription.
+4. **Language Detection**: Gemini identifies whether the transcribed text is English or Chinese.
 5. **Translation**: Based on the detected language, the text is translated to the other language.
-6. **Text-to-Speech**: The browser's Speech Synthesis API is used to read the translation aloud.
+6. **Text-to-Speech**: Translation is read aloud using the browser's speech synthesis API.
 
 ## Project Structure
 
@@ -96,30 +105,30 @@ gemini-interpreter/
 
 ## Limitations
 
-- Requires microphone access and browser support for the MediaRecorder API
-- Translation quality depends on the Gemini AI model's capabilities
-- Currently only supports English and Chinese language pairs
-- Requires an internet connection for API calls to Gemini
+- Requires microphone access permission and browser support for MediaRecorder API
+- Translation quality depends on the capabilities of Gemini AI model
+- Currently only supports English and Chinese language pair
+- Requires internet connection to call Gemini API
 
 ## Future Improvements
 
-- Add support for more languages
+- Add more language support
 - Implement streaming translation for real-time interpretation
-- Add speech-to-speech direct translation
-- Improve the audio visualization with more detailed waveforms
-- Save translation history to local storage or a database
-- Add export options for translations
+- Add direct speech-to-speech translation
+- Improve audio visualization with more detailed waveforms
+- Save translation history to local storage or database
+- Add translation export options
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Acknowledgments
+## Acknowledgements
 
-- Google Gemini AI for providing the AI models
-- Next.js team for the excellent framework
-- Web Audio and Speech Synthesis APIs for enabling audio processing
+- Thanks to Google Gemini AI for providing the AI model
+- Thanks to the Next.js team for the excellent framework
+- Thanks to Web Audio and Speech Synthesis APIs for audio processing
 
 ---
 
-Made with ❤️ by [Your Name] 
+Made with ❤️ by [Lewis Zhang | 张伟]

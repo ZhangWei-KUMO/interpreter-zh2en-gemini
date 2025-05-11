@@ -1,12 +1,18 @@
 # 中英文同声传译器
 
-一个使用 Next.js 14 和谷歌 Gemini 2.5 Pro AI 模型构建的实时英汉同声传译 Web 应用程序。
+<p align="center">
+  <img src="./public/icon-192x192.png" alt="中英文同声传译器图标" width="150">
+</p>
+
 
 [![Node.js](https://img.shields.io/badge/Node.js-v18.0%2B-brightgreen)](https://nodejs.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-v14-black)](https://nextjs.org/)
 [![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-blue)](https://ai.google.dev/)
 
 中文 | [English](README.md)
+
+本软件可根据用户口述的自然语言一键自动化进行汉英同声互译，无需用户任何手动设置。特别适合老年人出国旅游时使用。
+无论是洛杉矶的机场、泰国的沙滩，您都无需担心父母是否会遇到语言障碍。这款开源软件开发的初衷就是我的姨夫在美国机场因语言障碍导致出关遇到了麻烦，所以让我教他如何使用AI翻译软件，经过半个小时折腾后我意识到让老年人用好提示词或现有的AI软件的难度不亚于让我重新写一个AI软件。毕竟AI时代我们应当让每一个人都享受AI带来的便利，之后就有了这个开源项目。后续还会开发中日语、中韩语、中越语等多个版本，总之，“哪里不会点哪里”。
 
 ## 功能特点
 
@@ -126,4 +132,4 @@ gemini-interpreter/
 
 ---
 
-由 [您的名字] 用 ❤️ 制作 
+由 [Lewis Zhang | 张伟] 用 ❤️ 制作 

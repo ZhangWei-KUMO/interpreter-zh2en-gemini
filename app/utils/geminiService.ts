@@ -9,16 +9,16 @@ import { marked } from 'marked';
 // Use the same model as in the demo
 const MODEL_NAME = 'gemini-2.5-flash-preview-04-17';
 
-// API Key - replace with appropriate key management for production
-const DEFAULT_API_KEY = process.env.GEMINI_API_KEY || '';
+// API Key from environment variable - used as fallback
+const ENV_API_KEY = process.env.GEMINI_API_KEY || '';
 
 export class GeminiService {
   private genAI: GoogleGenerativeAI;
   private apiKey: string;
   
-  constructor(customApiKey?: string) {
-    // 优先使用自定义API Key，否则使用默认值
-    this.apiKey = customApiKey || DEFAULT_API_KEY;
+  constructor(uiApiKey?: string) {
+    // Priority: 1. UI-provided API key, 2. Environment variable API key
+    this.apiKey = uiApiKey || ENV_API_KEY;
     this.genAI = new GoogleGenerativeAI(this.apiKey);
   }
   
@@ -26,7 +26,7 @@ export class GeminiService {
    * Updates the API key and recreates the API client
    */
   updateApiKey(newApiKey: string) {
-    // 仅在新旧API Key不同时更新
+    // Only update if the new API key is different
     if (newApiKey && newApiKey !== this.apiKey) {
       this.apiKey = newApiKey;
       this.genAI = new GoogleGenerativeAI(this.apiKey);

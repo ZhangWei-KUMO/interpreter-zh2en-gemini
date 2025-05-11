@@ -1,13 +1,12 @@
 # Chinese-English Simultaneous Interpreter
 
-<p align="center">
-  <img src="./public/icon-192x192.png" alt="Chinese-English Interpreter Icon" width="150">
-</p>
-
-
 [![Node.js](https://img.shields.io/badge/Node.js-v18.0%2B-brightgreen)](https://nodejs.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-v14-black)](https://nextjs.org/)
 [![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-blue)](https://ai.google.dev/)
+
+<p align="center">
+  <img src="./public/icon-192x192.png" alt="Chinese-English Interpreter Icon" width="150">
+</p>
 
 [中文](README.zh.md) | English
 

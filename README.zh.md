@@ -1,13 +1,11 @@
 # 中英文同声传译器
+[![Node.js](https://img.shields.io/badge/Node.js-v18.0%2B-brightgreen)](https://nodejs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-v14-black)](https://nextjs.org/)
+[![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-blue)](https://ai.google.dev/)
 
 <p align="center">
   <img src="./public/icon-192x192.png" alt="中英文同声传译器图标" width="150">
 </p>
-
-
-[![Node.js](https://img.shields.io/badge/Node.js-v18.0%2B-brightgreen)](https://nodejs.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-v14-black)](https://nextjs.org/)
-[![Gemini](https://img.shields.io/badge/Gemini-2.5%20Pro-blue)](https://ai.google.dev/)
 
 中文 | [English](README.md)
 

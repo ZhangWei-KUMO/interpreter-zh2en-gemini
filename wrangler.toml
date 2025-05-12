@@ -1,6 +1,0 @@
-name = "interpreter-zh2en-gemini"
-main = "build/index.html"
-compatibility_date = "2023-09-01"
-
-[site]
-bucket = "./build" 

@@ -4,7 +4,7 @@
 [![React](https://img.shields.io/badge/React-18-blue?style=flat-square&logo=react)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![Google Generative AI](https://img.shields.io/badge/Powered%20by-Google%20Gemini-orange?style=flat-square&logo=google)](https://developers.generative-ai.google/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue?style=flat-square)](https://opensource.org/licenses/Apache-2.0)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://opensource.org/licenses/MIT)
 
 基于谷歌 Gemini 模型的中英文同声传译应用，使用 Next.js 构建。
 
@@ -65,6 +65,34 @@
 ```
 npm run build
 npm start
+```
+
+### 常见问题
+
+如果构建时遇到以下错误：
+
+```
+Error: Event handlers cannot be passed to Client Component props.
+  {onClick: function, className: ..., children: ...}
+            ^^^^^^^^
+If you need interactivity, consider converting part of this to a Client Component.
+```
+
+这是因为在 Next.js App Router 架构中，默认组件是服务器组件（Server Components），不能包含客户端交互事件如 `onClick`。解决方法：
+
+1. 在需要交互的组件文件顶部添加 `'use client'` 指令，将其转换为客户端组件
+2. 确保只在已标记为 `'use client'` 的组件中使用事件处理器
+
+例如：
+
+```tsx
+'use client';
+
+import React from 'react';
+
+export default function InteractiveComponent() {
+  return <button onClick={() => console.log('clicked')}>点击我</button>;
+}
 ```
 
 ## 许可证

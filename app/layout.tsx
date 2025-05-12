@@ -20,11 +20,21 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   themeColor: "#111111",
+  userScalable: false,
 };
 
 export const metadata: Metadata = {
   title: "中英实时翻译 | Gemini 翻译助手",
   description: "使用Gemini进行中英文实时翻译的应用",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "中英实时翻译",
+  },
+  formatDetection: {
+    telephone: false,
+  },
 };
 
 export default function RootLayout({
@@ -44,6 +54,10 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/icon?family=Material+Icons" 
           rel="stylesheet"
         />
+        {/* PWA icons */}
+        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className={inter.className}>
         <Providers>

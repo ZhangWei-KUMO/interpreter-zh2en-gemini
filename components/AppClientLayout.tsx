@@ -5,6 +5,7 @@ import cn from "classnames";
 import dynamic from 'next/dynamic';
 import { Altair } from "@/components/altair/Altair";
 import ControlTray from "@/components/control-tray/ControlTray";
+import DigitalHuman from "@/components/digital-human/DigitalHuman";
 
 // Dynamically import the client-only wrapper for SidePanel
 const SidePanelClientOnly = dynamic(() => import('@/components/side-panel/SidePanelClientOnly'), { ssr: false });
@@ -21,8 +22,16 @@ export default function AppClientLayout() {
         <SidePanelClientOnly />
         <main>
           <div className="main-app-area">
-            {/* APP goes here */}
-            <Altair />
+            {/* 数字人组件居中显示 */}
+            <div className="digital-human-wrapper">
+              <DigitalHuman />
+            </div>
+            
+            {/* Altair组件负责API调用，不可见 */}
+            <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
+              <Altair />
+            </div>
+            
             <video
               className={cn("stream", {
                 hidden: !videoRef.current || !videoStream,

@@ -310,4 +310,25 @@ p, li, span {
 @import '../components/altair/Altair.scss';
 @import '../components/audio-pulse/audio-pulse.scss';
 @import '../components/control-tray/control-tray.scss';
-@import '../components/settings-dialog/settings-dialog.scss'; 
+@import '../components/settings-dialog/settings-dialog.scss';
+
+// 数字人包装容器样式
+.digital-human-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  margin: 0 auto 20px;
+  background: linear-gradient(to bottom, rgba(20, 30, 48, 0.7), rgba(36, 59, 85, 0.5));
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  max-width: 800px;
+} 

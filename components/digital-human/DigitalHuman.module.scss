@@ -1,0 +1,155 @@
+.digitalHumanContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.digitalHumanAvatar {
+  position: relative;
+  width: 240px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  
+  &.speaking {
+    transform: scale(1.05);
+  }
+}
+
+.head {
+  position: relative;
+  width: 160px;
+  height: 200px;
+  background: linear-gradient(135deg, #64b5f6, #2196f3);
+  border-radius: 50% 50% 45% 45%;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.face {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  width: 100px;
+  height: 100px;
+}
+
+.eyes {
+  display: flex;
+  justify-content: space-between;
+  width: 80px;
+  margin: 0 auto;
+}
+
+.eye {
+  width: 25px;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 50%;
+  position: relative;
+  
+  &:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background-color: #333;
+    border-radius: 50%;
+  }
+}
+
+.mouth {
+  width: 40px;
+  height: 15px;
+  background-color: #f44336;
+  border-radius: 0 0 20px 20px;
+  margin: 20px auto 0;
+  transition: all 0.2s ease;
+  
+  &.animated {
+    height: 25px;
+    animation: speaking 0.5s infinite alternate;
+  }
+}
+
+.body {
+  width: 180px;
+  height: 120px;
+  background: linear-gradient(135deg, #42a5f5, #1976d2);
+  border-radius: 40% 40% 30% 30%;
+  margin-top: -30px;
+  z-index: -1;
+}
+
+.speechIndicator {
+  margin-top: 20px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audioWaves {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  
+  span {
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    margin: 0 3px;
+    background-color: #2196f3;
+    border-radius: 3px;
+    animation: wave 0.6s infinite ease-in-out alternate;
+    
+    &:nth-child(1) {
+      animation-delay: -0.4s;
+    }
+    
+    &:nth-child(2) {
+      animation-delay: -0.3s;
+    }
+    
+    &:nth-child(3) {
+      animation-delay: -0.2s;
+    }
+    
+    &:nth-child(4) {
+      animation-delay: -0.1s;
+    }
+    
+    &:nth-child(5) {
+      animation-delay: 0s;
+    }
+  }
+}
+
+@keyframes speaking {
+  0% {
+    height: 15px;
+  }
+  100% {
+    height: 25px;
+  }
+}
+
+@keyframes wave {
+  0% {
+    height: 5px;
+  }
+  100% {
+    height: 30px;
+  }
+} 

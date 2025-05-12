@@ -80,7 +80,6 @@ This software automatically performs Chinese-English simultaneous interpretation
 5. **Translation**: Based on the detected language, the text is translated to the other language.
 6. **Text-to-Speech**: Translation is read aloud using the browser's speech synthesis API.
 
-
 ## Limitations
 
 - Requires microphone access permission and browser support for MediaRecorder API

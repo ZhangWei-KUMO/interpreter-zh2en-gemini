@@ -4,7 +4,7 @@ import withPWA from 'next-pwa';
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    GEMINI_API_KEY: process.env.GEMINI_API_KEY || "AIzaSyB7B6681pEsgWq9mFkJNVqo3viGty2KiRw",
+    GEMINI_API_KEY: process.env.GEMINI_API_KEY || "",
   },
   webpack: (config, { isServer }) => {
     // Handle browser-only modules when server-side rendering

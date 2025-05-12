@@ -7,7 +7,7 @@ import { LiveAPIProvider } from "@/contexts/LiveAPIContext";
 // Get API key only in browser environment
 const getApiKey = () => {
   if (typeof window !== 'undefined' && process.env.GEMINI_API_KEY) {
-    return process.env.GEMINI_API_KEY || "AIzaSyB7B6681pEsgWq9mFkJNVqo3viGty2KiRw"
+    return process.env.GEMINI_API_KEY || ""
   }
   return '';
 };

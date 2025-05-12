@@ -1,0 +1,335 @@
+.side-panel {
+  background-color: var(--Neutral-5);
+  border-right: 1px solid var(--border-stroke);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  transition: all var(--transition-normal);
+  width: 400px;
+  overflow: hidden;
+  
+  // 折叠状态
+  &:not(.open) {
+    width: 40px;
+    
+    .top h2, 
+    .indicators,
+    .input-container {
+      opacity: 0;
+      pointer-events: none;
+    }
+    
+    .opener {
+      justify-content: center;
+    }
+  }
+  
+  // 标题栏
+  .top {
+    align-items: center;
+    background-color: var(--Neutral-10);
+    border-bottom: 1px solid var(--border-stroke);
+    display: flex;
+    padding: 12px 16px;
+    justify-content: space-between;
+    height: 56px;
+    
+    h2 {
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+      color: var(--Neutral-90);
+      transition: opacity var(--transition-normal);
+    }
+    
+    // 折叠按钮
+    .opener {
+      align-items: center;
+      background: none;
+      border: none;
+      color: var(--Neutral-60);
+      cursor: pointer;
+      display: flex;
+      padding: 4px;
+      border-radius: var(--radius-sm);
+      transition: all var(--transition-fast);
+      
+      &:hover {
+        color: var(--Neutral-90);
+        background-color: var(--Neutral-20);
+      }
+    }
+  }
+  
+  // 过滤和连接状态指示
+  .indicators {
+    align-items: center;
+    background-color: var(--Neutral-10);
+    border-bottom: 1px solid var(--border-stroke);
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    padding: 8px 16px;
+    height: 48px;
+    transition: opacity var(--transition-normal);
+    
+    // 流媒体状态指示器
+    .streaming-indicator {
+      align-items: center;
+      background-color: var(--Neutral-20);
+      border-radius: var(--radius-sm);
+      color: var(--text-secondary);
+      display: flex;
+      font-size: 13px;
+      gap: 4px;
+      padding: 4px 8px;
+      white-space: nowrap;
+      
+      &.connected {
+        color: var(--Blue-400);
+      }
+    }
+  }
+  
+  // 日志滚动区域
+  .side-panel-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+    position: relative;
+    
+    // 没有日志时的显示
+    .empty-log {
+      align-items: center;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      height: 100%;
+      justify-content: center;
+      padding: 16px;
+      text-align: center;
+      
+      .material-symbols-outlined {
+        font-size: 48px;
+        margin-bottom: 16px;
+        opacity: 0.5;
+      }
+    }
+  }
+  
+  // 日志条目容器
+  .log-entry-container {
+    border-bottom: 1px solid var(--border-stroke);
+    padding: 12px 16px;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &.highlight {
+      background-color: var(--Neutral-15);
+    }
+  }
+  
+  // 输入控件容器
+  .input-container {
+    background-color: var(--Neutral-10);
+    border-top: 1px solid var(--border-stroke);
+    padding: 12px 16px;
+    transition: opacity var(--transition-normal);
+    
+    &.disabled {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+    
+    .input-content {
+      background-color: var(--Neutral-20);
+      border: 1px solid var(--border-stroke);
+      border-radius: var(--radius-md);
+      display: flex;
+      min-height: 44px;
+      overflow: hidden;
+      position: relative;
+      transition: border-color var(--transition-fast);
+      
+      &:focus-within {
+        border-color: var(--Blue-500);
+        box-shadow: 0 0 0 1px var(--Blue-500);
+      }
+      
+      // 文本区域
+      .input-area {
+        background: transparent;
+        border: none;
+        color: var(--text);
+        font-family: inherit;
+        font-size: 14px;
+        flex: 1;
+        max-height: 120px;
+        min-height: 44px;
+        padding: 12px 44px 12px 12px;
+        resize: none;
+        width: 100%;
+        
+        &:focus {
+          outline: none;
+        }
+        
+        &:focus + .input-content-placeholder {
+          display: none;
+        }
+      }
+      
+      // 占位符文本
+      .input-content-placeholder {
+        color: var(--text-muted);
+        font-size: 14px;
+        left: 12px;
+        pointer-events: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: opacity var(--transition-fast);
+        
+        &.hidden {
+          opacity: 0;
+        }
+      }
+      
+      // 发送按钮
+      .send-button {
+        align-items: center;
+        background-color: transparent;
+        border: none;
+        border-radius: 50%;
+        color: var(--Blue-400);
+        cursor: pointer;
+        display: flex;
+        height: 32px;
+        justify-content: center;
+        padding: 0;
+        position: absolute;
+        right: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all var(--transition-fast);
+        width: 32px;
+        
+        &:hover {
+          background-color: var(--Neutral-30);
+          color: var(--Blue-500);
+        }
+        
+        .material-symbols-outlined {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+  
+  // 日志消息样式
+  .message {
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    &.user {
+      color: var(--Blue-400);
+    }
+    
+    &.model {
+      color: var(--Neutral-90);
+    }
+    
+    &.system {
+      color: var(--text-muted);
+      font-style: italic;
+    }
+    
+    &.error {
+      color: var(--Red-400);
+    }
+  }
+  
+  // 日志时间戳
+  .timestamp {
+    color: var(--text-muted);
+    font-size: 12px;
+    margin-top: 4px;
+  }
+}
+
+// ReactSelect组件的样式覆盖
+.react-select__control {
+  background-color: var(--Neutral-15) !important;
+  border-color: var(--border-stroke) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: none !important;
+  min-height: 33px !important;
+  
+  &:hover {
+    border-color: var(--Neutral-50) !important;
+  }
+  
+  &.react-select__control--is-focused {
+    border-color: var(--Blue-500) !important;
+    box-shadow: 0 0 0 1px var(--Blue-500) !important;
+  }
+}
+
+.react-select__menu {
+  background-color: var(--Neutral-10) !important;
+  border: 1px solid var(--border-stroke) !important;
+  border-radius: var(--radius-sm) !important;
+  box-shadow: var(--shadow-md) !important;
+  z-index: 100 !important;
+}
+
+.react-select__option {
+  color: var(--text) !important;
+  font-size: 14px !important;
+  
+  &.react-select__option--is-focused {
+    background-color: var(--Neutral-20) !important;
+  }
+  
+  &.react-select__option--is-selected {
+    background-color: var(--Blue-700) !important;
+    color: var(--text) !important;
+  }
+}
+
+.react-select__value-container {
+  padding: 0 8px !important;
+}
+
+.react-select__single-value {
+  color: var(--text) !important;
+  font-size: 14px !important;
+}
+
+.react-select__indicator {
+  color: var(--Neutral-60) !important;
+  padding: 4px !important;
+  
+  &:hover {
+    color: var(--Neutral-90) !important;
+  }
+}
+
+.react-select__indicator-separator {
+  background-color: var(--border-stroke) !important;
+} 

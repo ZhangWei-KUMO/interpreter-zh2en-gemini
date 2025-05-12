@@ -1,0 +1,376 @@
+.action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--Neutral-20);
+  color: var(--Neutral-80);
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  text-transform: lowercase;
+  cursor: pointer;
+  animation: opacity-pulse 3s ease-in infinite;
+  transition: all 0.2s ease-in-out;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
+  cursor: pointer;
+
+  &:focus {
+    border: 2px solid var(--Neutral-50);
+    outline: 2px solid var(--Neutral-30);
+  }
+
+  &.outlined {
+    background: var(--Neutral-10);
+    border: 1px solid var(--Neutral-30);
+  }
+
+  .no-action {
+    pointer-events: none;
+  }
+
+  &:hover {
+    background: var(--Neutral-30);
+    border: 1px solid var(--Neutral-60);
+  }
+
+  &.connected {
+    background: var(--Blue-800);
+    color: var(--Blue-400);
+
+    &:hover {
+      border: 1px solid var(--Blue-500);
+    }
+  }
+}
+
+@property --volume {
+  syntax: "length";
+  inherit: false;
+  initial-value: 0px;
+}
+
+.disabled .mic-button,
+.mic-button.disabled {
+  &:before {
+    background: rgba(0, 0, 0, 0);
+  }
+}
+
+.mic-button {
+  position: relative;
+  background-color: var(--Red-500);
+  z-index: 1;
+  color: var(--Neutral-5);
+  transition: all 0.2s ease-in;
+
+  &:focus {
+    border: 2px solid var(--Red-700);
+    outline: 2px solid var(--Red-500);
+  }
+
+  &:hover {
+    background-color: var(--Red-600);
+  }
+
+  &:before {
+    position: absolute;
+    z-index: -1;
+    top: calc(var(--volume) * -1);
+    left: calc(var(--volume) * -1);
+    display: block;
+    content: "";
+    opacity: 0.35;
+    background-color: var(--Red-500);
+    width: calc(100% + var(--volume) * 2);
+    height: calc(100% + var(--volume) * 2);
+    border-radius: 24px;
+    transition: all 0.02s ease-in-out;
+  }
+}
+
+.connect-toggle {
+  &:focus {
+    border: 2px solid var(--Blue-800);
+    outline: 2px solid var(--Blue-400);
+  }
+
+  &:not(.connected) {
+    background-color: var(--Blue-500);
+    color: var(--Neutral-5);
+  }
+}
+
+.control-tray {
+  background: var(--Neutral-5);
+  border-top: 1px solid var(--border-stroke);
+  bottom: 0;
+  display: flex;
+  height: 64px;
+  justify-content: space-between;
+  left: 0;
+  padding: 0 16px;
+  position: absolute;
+  width: 100%;
+  z-index: 5;
+  align-items: center;
+
+  .actions-nav {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    
+    &.disabled {
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    
+    // 所有操作按钮共有样式
+    .action-button {
+      align-items: center;
+      background-color: var(--Neutral-15);
+      border: none;
+      border-radius: var(--radius-md);
+      color: var(--Neutral-80);
+      cursor: pointer;
+      display: flex;
+      height: 40px;
+      justify-content: center;
+      position: relative;
+      transition: all var(--transition-fast);
+      width: 40px;
+      
+      &:hover {
+        background-color: var(--Neutral-20);
+        color: var(--Neutral-90);
+      }
+      
+      &:active {
+        background-color: var(--Neutral-30);
+      }
+      
+      // 带文本的按钮样式
+      &.with-text {
+        padding: 0 16px;
+        width: auto;
+        gap: 8px;
+        
+        .button-text {
+          font-size: 14px;
+          white-space: nowrap;
+        }
+      }
+      
+      // 带边框样式
+      &.outlined {
+        background-color: transparent;
+        border: 1px solid var(--Neutral-30);
+        
+        &:hover {
+          border-color: var(--Neutral-50);
+        }
+      }
+      
+      // 无操作按钮样式
+      &.no-action {
+        cursor: default;
+        
+        &:hover {
+          background-color: var(--Neutral-15);
+        }
+      }
+      
+      // 麦克风按钮特殊样式
+      &.mic-button {
+        .material-symbols-outlined {
+          color: var(--accent-green);
+          
+          &.filled {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24;
+          }
+        }
+        
+        &:hover .material-symbols-outlined {
+          color: var(--accent-green-hover);
+        }
+      }
+      
+      // 分享屏幕按钮特殊样式
+      &.screen-button {
+        .material-symbols-outlined {
+          color: var(--accent-blue);
+        }
+        
+        &:hover .material-symbols-outlined {
+          color: var(--accent-blue-hover);
+        }
+      }
+      
+      // 摄像头按钮特殊样式
+      &.camera-button {
+        .material-symbols-outlined {
+          color: var(--accent-blue);
+        }
+        
+        &:hover .material-symbols-outlined {
+          color: var(--accent-blue-hover);
+        }
+      }
+      
+      // 活跃状态
+      &.active {
+        background-color: var(--accent-blue-active-bg);
+        
+        .material-symbols-outlined {
+          color: var(--accent-blue-active);
+        }
+      }
+      
+      // 图标样式
+      .material-symbols-outlined {
+        font-size: 20px;
+      }
+    }
+  }
+
+  // 连接按钮样式
+  .connection-button {
+    align-items: center;
+    background-color: var(--Neutral-15);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--Neutral-90);
+    cursor: pointer;
+    display: flex;
+    gap: 8px;
+    height: 40px;
+    justify-content: center;
+    padding: 0 16px;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    
+    &:hover {
+      background-color: var(--Neutral-20);
+    }
+    
+    &:active {
+      background-color: var(--Neutral-30);
+    }
+    
+    // 连接中状态
+    &.connected {
+      background-color: var(--Blue-700);
+      color: var(--Neutral-100);
+      
+      &:hover {
+        background-color: var(--Blue-600);
+      }
+    }
+    
+    // 图标样式
+    .material-symbols-outlined {
+      font-size: 18px;
+    }
+    
+    // 按钮文本样式
+    .button-text {
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+  
+  // 右侧按钮组
+  .right-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  
+  // 设置按钮样式
+  .settings-button {
+    align-items: center;
+    background-color: var(--Neutral-15);
+    border: none;
+    border-radius: var(--radius-md);
+    color: var(--Neutral-80);
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    width: 40px;
+    
+    &:hover {
+      background-color: var(--Neutral-20);
+      color: var(--Neutral-90);
+    }
+    
+    &:active {
+      background-color: var(--Neutral-30);
+    }
+    
+    // 图标样式
+    .material-symbols-outlined {
+      font-size: 20px;
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  .control-tray {
+    padding: 0 12px;
+    height: 60px;
+    
+    .actions-nav {
+      gap: 8px;
+      
+      .action-button {
+        height: 36px;
+        width: 36px;
+        
+        &.with-text {
+          padding: 0 12px;
+          
+          .button-text {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+    
+    .connection-button {
+      height: 36px;
+      padding: 0 12px;
+      
+      .button-text {
+        font-size: 13px;
+      }
+    }
+    
+    .settings-button {
+      height: 36px;
+      width: 36px;
+    }
+  }
+}
+
+@keyframes opacity-pulse {
+  0% {
+    opacity: 0.9;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+} 

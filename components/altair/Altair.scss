@@ -1,0 +1,116 @@
+.vega-embed {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  
+  // 暗色主题样式
+  .chart-wrapper {
+    background-color: var(--Neutral-10) !important;
+  }
+  
+  .vega-actions {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--Neutral-15);
+    border: 1px solid var(--border-stroke);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    opacity: 0.2;
+    transition: opacity var(--transition-normal);
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    a {
+      color: var(--Neutral-90);
+      font-size: 12px;
+      padding: 8px 12px;
+      text-decoration: none;
+      transition: background-color var(--transition-fast);
+      
+      &:hover {
+        background-color: var(--Neutral-20);
+      }
+      
+      &:not(:last-child) {
+        border-bottom: 1px solid var(--border-stroke);
+      }
+    }
+  }
+  
+  // 图表容器
+  .marks {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
+  }
+  
+  // 图表文本
+  text {
+    fill: var(--Neutral-80);
+    font-family: 'Inter', sans-serif;
+  }
+  
+  // 图表轴线
+  .axis path,
+  .axis line {
+    stroke: var(--Neutral-30);
+  }
+  
+  // 图表标题
+  .chart-title {
+    fill: var(--Neutral-90);
+    font-weight: 500;
+    font-size: 16px;
+  }
+  
+  // 图表副标题
+  .chart-subtitle {
+    fill: var(--Neutral-70);
+    font-size: 14px;
+  }
+  
+  // 图例样式
+  .legend text {
+    fill: var(--Neutral-80);
+    font-size: 12px;
+  }
+}
+
+// 加载状态
+.vega-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &::after {
+    content: '';
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--Neutral-30);
+    border-radius: 50%;
+    border-top-color: var(--Blue-400);
+    animation: spin 1s linear infinite;
+  }
+}
+
+// 旋转动画
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+} 

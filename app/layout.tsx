@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Space_Mono } from "next/font/google";
 import "./globals.scss";
+import { Providers } from "@/components/Providers";
 
 // 初始化字体
 const inter = Inter({ 
@@ -14,11 +15,16 @@ const spaceMono = Space_Mono({
   variable: "--font-space-mono",
 });
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  themeColor: "#111111",
+};
+
 export const metadata: Metadata = {
   title: "中英实时翻译 | Gemini 翻译助手",
   description: "使用Gemini进行中英文实时翻译的应用",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
-  themeColor: "#111111",
 };
 
 export default function RootLayout({
@@ -40,7 +46,9 @@ export default function RootLayout({
         />
       </head>
       <body className={inter.className}>
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

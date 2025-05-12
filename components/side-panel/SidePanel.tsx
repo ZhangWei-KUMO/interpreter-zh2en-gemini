@@ -3,13 +3,17 @@
 import "./react-select.scss";
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
-import Select from "react-select";
+import Select, { SingleValue, ActionMeta } from 'react-select';
 import { useLiveAPIContext } from "@/contexts/LiveAPIContext";
 import { useLoggerStore } from "@/lib/store-logger";
 import Logger, { LoggerFilterType } from "../logger/Logger";
 import "./side-panel.scss";
+import { useConsoleVisibility } from "@/contexts/ConsoleVisibilityContext";
 
-const filterOptions = [
+// Define the option type explicitly
+type FilterOptionType = { value: string; label: string };
+
+const filterOptions: FilterOptionType[] = [
   { value: "conversations", label: "Conversations" },
   { value: "tools", label: "Tool Use" },
   { value: "none", label: "All" },
@@ -17,16 +21,13 @@ const filterOptions = [
 
 export default function SidePanel() {
   const { connected, client } = useLiveAPIContext();
-  const [open, setOpen] = useState(true);
+  const { isConsoleVisible: open, toggleConsole: setOpen } = useConsoleVisibility();
   const loggerRef = useRef<HTMLDivElement>(null);
   const loggerLastHeightRef = useRef<number>(-1);
   const { log, logs } = useLoggerStore();
 
   const [textInput, setTextInput] = useState("");
-  const [selectedOption, setSelectedOption] = useState<{
-    value: string;
-    label: string;
-  } | null>(null);
+  const [selectedOption, setSelectedOption] = useState<FilterOptionType | null>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   //scroll the log to the bottom when new logs come in
@@ -63,17 +64,18 @@ export default function SidePanel() {
       <header className="top">
         <h2>Console</h2>
         {open ? (
-          <button className="opener" onClick={() => setOpen(false)}>
+          <button className="opener" onClick={() => setOpen()}>
             <span className="material-symbols-outlined">chevron_left</span>
           </button>
         ) : (
-          <button className="opener" onClick={() => setOpen(true)}>
+          <button className="opener" onClick={() => setOpen()}>
             <span className="material-symbols-outlined">chevron_right</span>
           </button>
         )}
       </header>
       <section className="indicators">
-        <Select
+        <Select<FilterOptionType>
+          instanceId="filter-select"
           className="react-select"
           classNamePrefix="react-select"
           styles={{
@@ -96,8 +98,8 @@ export default function SidePanel() {
           }}
           defaultValue={selectedOption}
           options={filterOptions}
-          onChange={(e) => {
-            setSelectedOption(e);
+          onChange={(newValue: SingleValue<FilterOptionType>, actionMeta: ActionMeta<FilterOptionType>) => {
+            setSelectedOption(newValue);
           }}
         />
         <div className={cn("streaming-indicator", { connected })}>

@@ -14,13 +14,17 @@
   
   // 折叠状态
   &:not(.open) {
-    width: 40px;
+    width: 0;
+    border-right: none;
+    padding: 0;
     
     .top h2, 
     .indicators,
-    .input-container {
+    .input-container,
+    .side-panel-container {
       opacity: 0;
       pointer-events: none;
+      visibility: hidden;
     }
     
     .opener {

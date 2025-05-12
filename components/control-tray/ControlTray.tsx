@@ -26,6 +26,7 @@ import { AudioRecorder } from "../../lib/audio-recorder";
 import AudioPulse from "@/components/audio-pulse/AudioPulse";
 import "./control-tray.scss";
 import SettingsDialog from "@/components/settings-dialog/SettingsDialog";
+import { useConsoleVisibility } from "@/contexts/ConsoleVisibilityContext";
 
 export type ControlTrayProps = {
   videoRef: RefObject<HTMLVideoElement>;
@@ -79,6 +80,8 @@ function ControlTray({
   const [showSettings, setShowSettings] = useState(false);
   const renderCanvasRef = useRef<HTMLCanvasElement>(null);
   const connectButtonRef = useRef<HTMLButtonElement>(null);
+  const [isConnecting, setIsConnecting] = useState(false);
+  const { isConsoleVisible, toggleConsole } = useConsoleVisibility();
 
   const { client, connected, connect, disconnect, volume } =
     useLiveAPIContext();
@@ -170,7 +173,19 @@ function ControlTray({
     if (connected) {
       disconnect();
     } else {
-      connect();
+      // 显示连接中提示
+      setIsConnecting(true);
+      
+      connect()
+        .then(() => {
+          setIsConnecting(false);
+        })
+        .catch((error) => {
+          setIsConnecting(false);
+          // 显示错误提示
+          alert(`连接失败: ${error.message || '连接服务器时出错，请检查网络或API密钥是否正确'}`);
+          console.error("Connection error:", error);
+        });
     }
   };
 
@@ -227,13 +242,22 @@ function ControlTray({
             ref={connectButtonRef}
             className={cn("connection-button", { connected })}
             onClick={toggleConnection}
+            disabled={isConnecting}
           >
             <span className="material-symbols-outlined">
               {connected ? "power" : "power_off"}
             </span>
             <span className="button-text">
-              {connected ? "断开连接" : "开始连接"}
+              {isConnecting ? "连接中..." : (connected ? "断开连接" : "开始连接")}
             </span>
+          </button>
+
+          <button 
+            className={cn("console-button", { active: isConsoleVisible })} 
+            onClick={toggleConsole}
+            title="控制台"
+          >
+            <span className="material-symbols-outlined">terminal</span>
           </button>
 
           {enableEditingSettings && (

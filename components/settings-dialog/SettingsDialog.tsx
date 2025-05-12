@@ -23,6 +23,7 @@ import { useLiveAPIContext } from "@/contexts/LiveAPIContext";
 const STORAGE_KEYS = {
   API_KEY: 'gemini-interpreter-api-key',
   SYSTEM_PROMPT: 'gemini-interpreter-system-prompt',
+  VOICE_NAME: 'gemini-interpreter-voice-name',
 };
 
 // 默认系统提示词
@@ -35,6 +36,18 @@ If you don't know the answer to a question, please don't share false information
 
 You are currently acting as a Chinese to English interpreter, translating Chinese text or speech to English in real-time.`;
 
+// 可选的语音名称
+const VOICE_OPTIONS = [
+  { value: "Puck", label: "Puck" },
+  { value: "Charon", label: "Charon" },
+  { value: "Kore", label: "Kore" },
+  { value: "Fenrir", label: "Fenrir" },
+  { value: "Aoede", label: "Aoede" },
+];
+
+// 默认语音名称
+const DEFAULT_VOICE_NAME = "Kore";
+
 interface SettingsDialogProps {
   onClose?: () => void;
 }
@@ -46,6 +59,7 @@ export default function SettingsDialog({ onClose }: SettingsDialogProps) {
   
   const [apiKey, setApiKey] = useState("");
   const [systemPrompt, setSystemPrompt] = useState(DEFAULT_SYSTEM_PROMPT);
+  const [voiceName, setVoiceName] = useState(DEFAULT_VOICE_NAME);
   const [saved, setSaved] = useState(false);
   const [message, setMessage] = useState("");
   const [needsReconnect, setNeedsReconnect] = useState(false);
@@ -56,6 +70,7 @@ export default function SettingsDialog({ onClose }: SettingsDialogProps) {
   useEffect(() => {
     const storedApiKey = localStorage.getItem(STORAGE_KEYS.API_KEY);
     const storedSystemPrompt = localStorage.getItem(STORAGE_KEYS.SYSTEM_PROMPT);
+    const storedVoiceName = localStorage.getItem(STORAGE_KEYS.VOICE_NAME);
 
     if (storedApiKey) {
       setApiKey(storedApiKey);
@@ -63,6 +78,10 @@ export default function SettingsDialog({ onClose }: SettingsDialogProps) {
 
     if (storedSystemPrompt) {
       setSystemPrompt(storedSystemPrompt);
+    }
+    
+    if (storedVoiceName) {
+      setVoiceName(storedVoiceName);
     }
   }, []);
 
@@ -92,8 +111,9 @@ export default function SettingsDialog({ onClose }: SettingsDialogProps) {
   };
 
   const saveSettings = () => {
-    // 保存系统提示词到localStorage
+    // 保存系统提示词和语音名称到localStorage
     localStorage.setItem(STORAGE_KEYS.SYSTEM_PROMPT, systemPrompt);
+    localStorage.setItem(STORAGE_KEYS.VOICE_NAME, voiceName);
 
     // 检查API Key是否更改
     const oldApiKey = localStorage.getItem(STORAGE_KEYS.API_KEY);
@@ -106,11 +126,19 @@ export default function SettingsDialog({ onClose }: SettingsDialogProps) {
       setMessage("API Key has been updated. Please reconnect to apply changes.");
     }
 
-    // 更新模型配置 - 系统提示词
+    // 更新模型配置 - 系统提示词和语音设置
     setConfig({
       ...config,
       systemInstruction: {
         parts: [{ text: systemPrompt }]
+      },
+      generationConfig: {
+        ...config.generationConfig,
+        responseModalities: "audio",
+        speechConfig: {
+          voiceConfig: { prebuiltVoiceConfig: { voiceName: voiceName } },
+          languageCode: "cmn-CN" as any,
+        },
       }
     });
 
@@ -147,6 +175,7 @@ export default function SettingsDialog({ onClose }: SettingsDialogProps) {
 
   const handleReset = () => {
     setSystemPrompt(DEFAULT_SYSTEM_PROMPT);
+    setVoiceName(DEFAULT_VOICE_NAME);
   };
 
   if (!isOpen) {
@@ -194,6 +223,29 @@ export default function SettingsDialog({ onClose }: SettingsDialogProps) {
               <p className="input-help">
                 输入用于翻译的 Gemini API Key。
                 如果已更改，需要重新连接才能生效。
+              </p>
+            </div>
+          </div>
+
+          <div className="settings-section">
+            <h4>语音设置</h4>
+            <div className="input-group">
+              <label htmlFor="voice-name">语音角色</label>
+              <select
+                id="voice-name"
+                value={voiceName}
+                onChange={(e) => setVoiceName(e.target.value)}
+                className="voice-select"
+              >
+                {VOICE_OPTIONS.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+              <p className="input-help">
+                选择模型回复时使用的语音角色。
+                不同的角色有不同的音色和风格。
               </p>
             </div>
           </div>

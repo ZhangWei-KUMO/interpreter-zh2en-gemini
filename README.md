@@ -40,7 +40,7 @@
 3. 配置环境变量
    创建 `.env` 文件并添加 Google AI API 密钥：
    ```
-   GOOGLE_API_KEY=your_google_ai_api_key
+   GEMINI_API_KEY=your_google_ai_api_key
    ```
 
 APIKEY请自行去https://aistudio.google.com 申请

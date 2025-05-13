@@ -40,6 +40,7 @@ export default function AppClientLayout() {
                     <li>点击右下角的电源按钮开始翻译</li>
                     <li>请说中文或英文</li>
                     <li>AI将进行中英同声传译</li>
+                    <li>如果希望接入自己Gemini API Key，请在右下角设置中进行配置</li>
                   </ol>
                 </div>
                 

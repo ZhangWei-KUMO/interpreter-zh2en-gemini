@@ -38,10 +38,12 @@
    ```
 
 3. 配置环境变量
-   创建 `.env.local` 文件并添加 Google AI API 密钥：
+   创建 `.env` 文件并添加 Google AI API 密钥：
    ```
    GOOGLE_API_KEY=your_google_ai_api_key
    ```
+
+APIKEY请仔细去https://aistudio.google.com/申请
 
 4. 运行开发服务器
    ```

@@ -34,6 +34,7 @@ export type ControlTrayProps = {
   supportsVideo: boolean;
   onVideoStreamChange?: (stream: MediaStream | null) => void;
   enableEditingSettings?: boolean;
+  onRecordingStateChange?: (isRecording: boolean) => void;
 };
 
 type MediaStreamButtonProps = {
@@ -69,6 +70,7 @@ function ControlTray({
   onVideoStreamChange = () => {},
   supportsVideo,
   enableEditingSettings,
+  onRecordingStateChange,
 }: ControlTrayProps) {
   const videoStreams = [useWebcam(), useScreenCapture()];
   const [activeVideoStream, setActiveVideoStream] =
@@ -172,6 +174,7 @@ function ControlTray({
   const toggleConnection = () => {
     if (connected) {
       disconnect();
+      if (onRecordingStateChange) onRecordingStateChange(false);
     } else {
       // 显示连接中提示
       setIsConnecting(true);
@@ -179,6 +182,7 @@ function ControlTray({
       connect()
         .then(() => {
           setIsConnecting(false);
+          if (onRecordingStateChange && !muted) onRecordingStateChange(true);
         })
         .catch((error) => {
           setIsConnecting(false);
@@ -197,7 +201,13 @@ function ControlTray({
         <div className={cn("actions-nav", { disabled: !connected })}>
           <button
             className={cn("action-button mic-button", { active: !muted })}
-            onClick={() => setMuted(!muted)}
+            onClick={() => {
+              const newMuted = !muted;
+              setMuted(newMuted);
+              if (onRecordingStateChange && connected) {
+                onRecordingStateChange(!newMuted);
+              }
+            }}
             title={muted ? "打开麦克风" : "关闭麦克风"}
           >
             {!muted ? (

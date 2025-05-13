@@ -43,7 +43,7 @@
    GOOGLE_API_KEY=your_google_ai_api_key
    ```
 
-APIKEY请仔细去https://aistudio.google.com 申请
+APIKEY请自行去https://aistudio.google.com 申请
 
 4. 运行开发服务器
    ```

@@ -18,7 +18,8 @@ if (typeof window !== 'undefined' && !API_KEY) {
   throw new Error("set GEMINI_API_KEY in .env");
 }
 
-const host = "generativelanguage.googleapis.com";
+// const host = "generativelanguage.googleapis.com";
+const host = "gemini-wss.tubex.chat";
 const uri = `wss://${host}/ws/google.ai.generativelanguage.v1alpha.GenerativeService.BidiGenerateContent`;
 
 export function Providers({ children }: { children: ReactNode }) {
